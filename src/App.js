@@ -8,6 +8,10 @@ query {
   getMovies{
       name
       rating
+      producers{
+         name
+         by
+      }
   }
 }
 `
@@ -32,19 +36,19 @@ query {
 
     <div className='App' >
       <div className='container'>
-        <table>
-          
-        {data.getMovies.map((value,index) => {
-          return (
-            <>
-               <tr key={index}>
-              <td>{value.name}</td>
-              <td>{value.rating}</td>
-            </tr>
-            </>
-          )
-        })}
-        </table>
+        <ul>
+          {data.getMovies.map((innerArray, outerIndex) => (
+            <li key={outerIndex}>
+              <li>{innerArray.name}</li>
+              <li>{innerArray.rating}</li>
+              <ul>
+                {innerArray.producers.map((item, innerIndex) => (
+                  <li key={innerIndex}>{item.name}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )
